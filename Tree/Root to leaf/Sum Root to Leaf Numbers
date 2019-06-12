@@ -1,0 +1,18 @@
+void dfs(TreeNode *A,int num, int &sum)
+ {
+     if(!A)
+        return;
+    if(!A->left && !A->right)
+    {
+        num=((num*10)%1003+A->val)%1003;
+        sum=(sum+num%1003)%1003;
+        return;
+    }
+    dfs(A->left,((num*10)%1003+A->val)%1003,sum);
+    dfs(A->right,((num*10)%1003+A->val)%1003,sum);
+ }
+int Solution::sumNumbers(TreeNode* A) {
+    int sum=0;
+    dfs(A,0,sum);
+    return sum%1003;
+}
