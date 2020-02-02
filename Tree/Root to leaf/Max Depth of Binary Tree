@@ -1,9 +1,0 @@
-
-int Solution::maxDepth(TreeNode* A) {
-    if(!A)
-        return 0;
-    int ans=1,ans1=1;
-    ans+=maxDepth(A->left);
-    ans1+=maxDepth(A->right);
-    return max(ans,ans1);
-}
