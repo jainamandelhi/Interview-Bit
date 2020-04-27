@@ -1,42 +1,36 @@
 vector<int> Solution::flip(string A) {
-    int n=A.size();
-    int a=-1,b=-1;
-    int maxi=INT_MIN;
-    int temp=0,j=0,i=0;
-    for(i=0;i<n;i++)
+    int n = A.size();
+    int i = 0,j = 0, indi = -1, indj = -1;
+    int maxi = 0, cnt = 0;
+    while(j < n)
     {
-        if(A[i]=='1')
+        if(A[j] == '0')
         {
-            temp--;
-            if(temp<0)
-            {
-                j=i+1;
-                temp=0;
-            }
+            cnt++;
         }
         else
         {
-            temp++;
-            if(temp>maxi)
+            cnt--;
+            if(cnt < 0)
             {
-                maxi=temp;
-                a=j;
-                b=i;
+                j++;
+                i = j;
+                cnt = 0;
+                continue;
             }
         }
-    }
-    if(temp>maxi && temp>0)
-    {
-        maxi=temp;
-        a=j;
-        b=i;
+        if(cnt > maxi)
+        {
+            maxi = cnt;
+            indj = j;
+            indi = i;
+        }
+        j++;
     }
     vector<int>ans;
-    if(a!=-1 && b!=-1)
-    {
-        ans.push_back(a+1);
-        ans.push_back(b+1);
-    }
+    if(indi == -1)
+        return ans;
+    ans.push_back(indi+1);
+    ans.push_back(indj+1);
     return ans;
-    
 }
